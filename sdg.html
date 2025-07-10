@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio | Jeevan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f0f2a; color: white; overflow-x: hidden; }
+
+    #galaxy-bg {
+      position: fixed; top: 0; left: 0; z-index: -1;
+      width: 100vw; height: 100vh;
+    }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 30px; background: #0f0f2a; position: sticky; top: 0; z-index: 1000;
+    }
+
+    .logo { font-size: 24px; font-weight: bold; color: white; }
+    .menu-icon { display: none; font-size: 26px; cursor: pointer; color: #00ffff; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: #ffffffb0;
+      text-decoration: none;
+      font-size: 16px;
+      transition: .3s;
+    }
+
+    nav ul li a.active, nav ul li a:hover { color: #00ffff; }
+
+    section { padding: 60px 30px; }
+    h2 { font-size: 32px; color: #00ffff; margin-bottom: 20px; }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .content h3 { font-size: 20px; color: #ccc; margin-bottom: 10px; }
+    .content h1 { font-size: 45px; margin-bottom: 15px; }
+    .highlight { color: #00ffff; }
+    .content p { max-width: 400px; color: #aaa; margin-bottom: 20px; }
+
+    .socials a {
+      color: #00ffff;
+      background: rgba(0,255,255,0.1);
+      padding: 14px;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: 24px;
+      transition: .3s;
+    }
+
+    .socials a:hover { background: rgba(0,255,255,0.3); transform: scale(1.2); }
+
+    .profile-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-image img {
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      border: 6px solid #00ffff;
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0,255,255,0.5);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .skills, .education, .portfolio, .contact {
+      background: #1e1e3b;
+      margin: 20px 0;
+      border-radius: 10px;
+      padding: 40px;
+    }
+
+    .skills ul, .education ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 15px;
+      list-style: none;
+    }
+
+    .skills li {
+      padding:10px; border-radius:5px; font-weight:bold;
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; background:#334155; color:white;
+    }
+
+    .skills li i.fab.fa-html5 { color:#e34c26; }
+    .skills li i.fab.fa-css3-alt { color:#264de4; }
+    .skills li i.fab.fa-js { color:#f0db4f; }
+    .skills li i.fab.fa-react { color:#61dbfb; }
+    .skills li i.fab.fa-node-js { color:#3c873a; }
+    .skills li i.fab.fa-github { color:#ffffff; }
+    .skills li i.fas.fa-database { color:#4db33d; }
+    .skills li i.fas.fa-server { color:#ff6347; }
+
+    .education li {
+      background:#2c2f4a;
+      padding:10px;
+      border-radius:5px;
+      color:#ccc;
+      font-size:16px;
+    }
+
+    .education li span.school { font-weight:bold; color:#fff; }
+
+    .portfolio-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .portfolio-items div {
+      background:#2c2f4a;
+      padding:20px;
+      border-radius:10px;
+      text-align:center;
+    }
+
+    .portfolio-items h3 { color:#00ffff; }
+    .portfolio-items p { color:#ccc; font-size:14px; }
+    .portfolio-items a {
+      color:#00ffff;
+      margin-top:10px;
+      display:inline-block;
+      text-decoration:underline;
+      font-weight:bold;
+    }
+
+    .contact form {
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+    }
+
+    .contact input, .contact textarea {
+      padding:10px;
+      border:none;
+      border-radius:5px;
+    }
+
+    .contact button {
+      background:#00ffff;
+      border:none;
+      padding:10px;
+      font-weight:bold;
+      border-radius:5px;
+      cursor:pointer;
+      color:#0f172a;
+    }
+
+    .contact button:hover { background:#00dddd; }
+
+    @media(max-width:768px){
+      .menu-icon { display:block; }
+
+      nav ul {
+        flex-direction: column;
+        display: flex;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        background: #0f172a;
+        width: 100%;
+      }
+
+      nav ul.active {
+        max-height: 300px;
+      }
+
+      nav ul li { padding:10px 20px; }
+      .hero { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="galaxy-bg"></canvas>
+  <header>
+    <div class="logo">Jeevan</div>
+    <i class="fas fa-bars menu-icon" onclick="toggleMenu()" aria-label="Toggle navigation menu"></i>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="content">
+      <h3>Hi, It's Me K.Jeevan</h3>
+      <h1>I'm <span class="highlight">a Full Stack Developer</span></h1>
+      <p>Crafting responsive, interactive, and beautiful websites using the latest tech.</p>
+      <div class="socials">
+        <a href="mailto:jeevanraju07@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+919573240020"><i class="fas fa-phone"></i></a>
+        <a href="https://www.linkedin.com/in/jeevan-raju-978269301" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/jeevan_raju_07" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919573240020" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="profile-image"><img src="jeevan.jpg" alt="Profile Photo" /></div>
+  </section>
+
+  <section class="skills" id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li><i class="fab fa-html5"></i> HTML5</li>
+      <li><i class="fab fa-css3-alt"></i> CSS3</li>
+      <li><i class="fab fa-js"></i> JavaScript</li>
+      <li><i class="fab fa-react"></i> React</li>
+      <li><i class="fab fa-node-js"></i> Node.js</li>
+      <li><i class="fab fa-github"></i> Git & GitHub</li>
+      <li><i class="fas fa-database"></i> MongoDB & MySQL</li>
+      <li><i class="fas fa-server"></i> Express & Flask</li>
+    </ul>
+  </section>
+
+  <section class="education" id="education">
+    <h2>Education</h2>
+    <ul>
+      <li><span class="school">10th Class:</span> Sri Bhavani Vidhya Nikethan EM High School</li>
+      <li><span class="school">11th–12th:</span> MGM Jr College</li>
+      <li><span class="school">B.Tech IT:</span> Bachelor of Technology (Information Technology)</li>
+    </ul>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <h2>My Projects</h2>
+    <div class="portfolio-items">
+      <div><h3>Green Harvest - E-commerce</h3><p>Organic store w/ cart & animations</p><a href="https://shiva-02-konetijeevanrajus-projects.vercel.app/" target="_blank">Visit Project</a></div>
+      <div><h3>Pushpa Movie Fan Site</h3><p>HTML/CSS/JS fan site</p><a href="https://my-website-alpha-smoky-17.vercel.app" target="_blank">Visit Project</a></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form id="contact-form">
+      <input type="text" name="user_name" placeholder="Your Name" required />
+      <input type="email" name="user_email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p style="margin-top:20px; color:#ccc;">
+      Email: <a href="mailto:jeevankoneti646@gmail.com" style="color:#00ffff;">jeevankoneti646@gmail.com</a> |
+      Phone: <a href="tel:+919573240020" style="color:#00ffff;">+91 95732 40020</a>
+    </p>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+
+    const navLinks = document.querySelectorAll("#nav-links a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("nav-links").classList.remove("active");
+      });
+    });
+
+    const canvas = document.getElementById('galaxy-bg');
+    const ctx = canvas.getContext('2d');
+    let w, h, stars = [], milky = [], asteroids = [], moon = {x:0, y:0, r:80, angle:0};
+
+    function init() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      stars = []; milky = []; asteroids = [];
+      for (let i=0;i<500;i++) stars.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.5, dx: 0.2 + Math.random()*0.5});
+      for (let i=0;i<150;i++) milky.push({x:Math.random()*w, y:Math.random()*h, length:50+Math.random()*100});
+      for (let i=0;i<15;i++) asteroids.push({x:Math.random()*w, y:Math.random()*h, r:3+Math.random()*4, dx:-1-Math.random()*2, dy:(Math.random()-0.5)});
+      moon.x = w/2; moon.y = h/2;
+    }
+
+    function draw() {
+      ctx.fillStyle = "#0f0f2a"; ctx.fillRect(0,0,w,h);
+      ctx.fillStyle = "white";
+      stars.forEach(s=>{
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI); ctx.fill();
+        s.x += s.dx;
+        if (s.x > w) s.x = 0;
+      });
+      ctx.strokeStyle = "rgba(200,200,255,0.15)";
+      milky.forEach(m=>{ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m.x+m.length,m.y); ctx.stroke();});
+      asteroids.forEach(a=>{
+        ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,2*Math.PI);
+        ctx.fillStyle="orange"; ctx.shadowColor="red"; ctx.shadowBlur=10; ctx.fill(); ctx.shadowBlur=0;
+        a.x+=a.dx; a.y+=a.dy;
+        if(a.x< -a.r){ a.x = w + a.r; a.y=Math.random()*h; }
+      });
+
+      moon.angle += 0.002;
+      ctx.save();
+      ctx.translate(moon.x, moon.y);
+      ctx.rotate(moon.angle);
+      ctx.beginPath(); ctx.arc(0,0,moon.r,0,2*Math.PI);
+      ctx.fillStyle="#dddddd"; ctx.shadowColor="#ffffffaa"; ctx.shadowBlur=40; ctx.fill(); ctx.shadowBlur=0;
+      ctx.restore();
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', init);
+    init(); draw();
+  </script>
+</body>
+</html>
