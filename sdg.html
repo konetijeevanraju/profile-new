@@ -6,21 +6,52 @@
   <title>Portfolio | Jeevan</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', sans-serif; background: #0f0f2a; color: white; overflow-x: hidden; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f2a;
+      color: white;
+      overflow-x: hidden;
+    }
 
     #galaxy-bg {
-      position: fixed; top: 0; left: 0; z-index: -1;
-      width: 100vw; height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
     }
 
     header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 30px; background: #0f0f2a; position: sticky; top: 0; z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: #0f0f2a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    .logo { font-size: 24px; font-weight: bold; color: white; }
-    .menu-icon { display: none; font-size: 26px; cursor: pointer; color: #00ffff; }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #00ffff;
+    }
 
     nav ul {
       list-style: none;
@@ -35,10 +66,20 @@
       transition: .3s;
     }
 
-    nav ul li a.active, nav ul li a:hover { color: #00ffff; }
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #00ffff;
+    }
 
-    section { padding: 60px 30px; }
-    h2 { font-size: 32px; color: #00ffff; margin-bottom: 20px; }
+    section {
+      padding: 60px 30px;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #00ffff;
+      margin-bottom: 20px;
+    }
 
     .hero {
       display: flex;
@@ -48,10 +89,26 @@
       gap: 40px;
     }
 
-    .content h3 { font-size: 20px; color: #ccc; margin-bottom: 10px; }
-    .content h1 { font-size: 45px; margin-bottom: 15px; }
-    .highlight { color: #00ffff; }
-    .content p { max-width: 400px; color: #aaa; margin-bottom: 20px; }
+    .content h3 {
+      font-size: 20px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .content h1 {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #00ffff;
+    }
+
+    .content p {
+      max-width: 400px;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
 
     .socials a {
       color: #00ffff;
@@ -63,7 +120,10 @@
       transition: .3s;
     }
 
-    .socials a:hover { background: rgba(0,255,255,0.3); transform: scale(1.2); }
+    .socials a:hover {
+      background: rgba(0,255,255,0.3);
+      transform: scale(1.2);
+    }
 
     .profile-image {
       display: flex;
@@ -72,7 +132,8 @@
     }
 
     .profile-image img {
-      width: 250px; height: 250px;
+      width: 250px;
+      height: 250px;
       border-radius: 50%;
       border: 6px solid #00ffff;
       object-fit: cover;
@@ -81,7 +142,7 @@
     }
 
     @keyframes float {
-      0%,100% { transform: translateY(0); }
+      0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
 
@@ -94,107 +155,149 @@
 
     .skills ul, .education ul {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       list-style: none;
     }
 
     .skills li {
-      padding:10px; border-radius:5px; font-weight:bold;
-      display:flex; align-items:center; gap:10px;
-      font-size:16px; background:#334155; color:white;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      background: #334155;
+      color: white;
     }
-
-    .skills li i.fab.fa-html5 { color:#e34c26; }
-    .skills li i.fab.fa-css3-alt { color:#264de4; }
-    .skills li i.fab.fa-js { color:#f0db4f; }
-    .skills li i.fab.fa-react { color:#61dbfb; }
-    .skills li i.fab.fa-node-js { color:#3c873a; }
-    .skills li i.fab.fa-github { color:#ffffff; }
-    .skills li i.fas.fa-database { color:#4db33d; }
-    .skills li i.fas.fa-server { color:#ff6347; }
 
     .education li {
-      background:#2c2f4a;
-      padding:10px;
-      border-radius:5px;
-      color:#ccc;
-      font-size:16px;
+      background: #2c2f4a;
+      padding: 10px;
+      border-radius: 5px;
+      color: #ccc;
+      font-size: 16px;
     }
 
-    .education li span.school { font-weight:bold; color:#fff; }
+    .education li span.school {
+      font-weight: bold;
+      color: #fff;
+    }
 
     .portfolio-items {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-      gap:20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
     .portfolio-items div {
-      background:#2c2f4a;
-      padding:20px;
-      border-radius:10px;
-      text-align:center;
+      background: #2c2f4a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
     }
 
-    .portfolio-items h3 { color:#00ffff; }
-    .portfolio-items p { color:#ccc; font-size:14px; }
+    .portfolio-items h3 {
+      color: #00ffff;
+    }
+
+    .portfolio-items p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
     .portfolio-items a {
-      color:#00ffff;
-      margin-top:10px;
-      display:inline-block;
-      text-decoration:underline;
-      font-weight:bold;
+      color: #00ffff;
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: underline;
+      font-weight: bold;
     }
 
     .contact form {
-      display:flex;
-      flex-direction:column;
-      gap:15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .contact input, .contact textarea {
-      padding:10px;
-      border:none;
-      border-radius:5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
     }
 
     .contact button {
-      background:#00ffff;
-      border:none;
-      padding:10px;
-      font-weight:bold;
-      border-radius:5px;
-      cursor:pointer;
-      color:#0f172a;
+      background: #00ffff;
+      border: none;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #0f172a;
     }
 
-    .contact button:hover { background:#00dddd; }
+    .contact button:hover {
+      background: #00dddd;
+    }
 
-    @media(max-width:768px){
-      .menu-icon { display:block; }
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
 
       nav ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #0f172a;
         flex-direction: column;
-        display: flex;
+        width: 100%;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease;
-        background: #0f172a;
-        width: 100%;
       }
 
       nav ul.active {
         max-height: 300px;
       }
 
-      nav ul li { padding:10px 20px; }
-      .hero { flex-direction: column; text-align: center; }
+      nav ul li {
+        padding: 15px 20px;
+        text-align: center;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
     }
+    .skills li {
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  background: #334155;
+  color: white;
+}
+
+.skills li i.fab.fa-html5 { color: #e34c26; }
+.skills li i.fab.fa-css3-alt { color: #264de4; }
+.skills li i.fab.fa-js { color: #f0db4f; }
+.skills li i.fab.fa-react { color: #61dbfb; }
+.skills li i.fab.fa-node-js { color: #3c873a; }
+.skills li i.fab.fa-github { color: #ffffff; }
+.skills li i.fas.fa-database { color: #4db33d; }
+.skills li i.fas.fa-server { color: #ff6347; }
+
   </style>
 </head>
 <body>
   <canvas id="galaxy-bg"></canvas>
+
   <header>
     <div class="logo">Jeevan</div>
     <i class="fas fa-bars menu-icon" onclick="toggleMenu()" aria-label="Toggle navigation menu"></i>
@@ -282,6 +385,7 @@
       });
     });
 
+    // Galaxy Animation Script
     const canvas = document.getElementById('galaxy-bg');
     const ctx = canvas.getContext('2d');
     let w, h, stars = [], milky = [], asteroids = [], moon = {x:0, y:0, r:80, angle:0};
@@ -301,11 +405,14 @@
       ctx.fillStyle = "white";
       stars.forEach(s=>{
         ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI); ctx.fill();
-        s.x += s.dx;
-        if (s.x > w) s.x = 0;
+        s.x += s.dx; if (s.x > w) s.x = 0;
       });
+
       ctx.strokeStyle = "rgba(200,200,255,0.15)";
-      milky.forEach(m=>{ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m.x+m.length,m.y); ctx.stroke();});
+      milky.forEach(m=>{
+        ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m.x+m.length,m.y); ctx.stroke();
+      });
+
       asteroids.forEach(a=>{
         ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,2*Math.PI);
         ctx.fillStyle="orange"; ctx.shadowColor="red"; ctx.shadowBlur=10; ctx.fill(); ctx.shadowBlur=0;
