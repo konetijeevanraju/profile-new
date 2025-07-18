@@ -47,10 +47,17 @@
     }
 
     .menu-icon {
-      display: none;
+      display: none; /* hidden on desktop */
       font-size: 28px;
       cursor: pointer;
       color: #00ffff;
+      /* Align right explicitly */
+      order: 2; /* ensures it appears after nav in flex */
+    }
+
+    nav {
+      order: 1; /* appears before menu icon */
+      flex-grow: 1;
     }
 
     nav ul {
@@ -241,68 +248,84 @@
       background: #00dddd;
     }
 
+    /* Skills icons colors */
+    .skills li i.fab.fa-html5 { color: #e34c26; }
+    .skills li i.fab.fa-css3-alt { color: #264de4; }
+    .skills li i.fab.fa-js { color: #f0db4f; }
+    .skills li i.fab.fa-react { color: #61dbfb; }
+    .skills li i.fab.fa-node-js { color: #3c873a; }
+    .skills li i.fab.fa-github { color: #ffffff; }
+    .skills li i.fas.fa-database { color: #4db33d; }
+    .skills li i.fas.fa-server { color: #ff6347; }
+
+    /* Responsive styles for mobile */
     @media (max-width: 768px) {
+      /* Show hamburger icon */
       .menu-icon {
         display: block;
+        /* Position fixed right top */
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        z-index: 1100;
+      }
+
+      /* Nav styling for mobile */
+      nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        background: #0f172a;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+        padding-top: 70px;
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+      }
+
+      nav.active {
+        transform: translateX(0);
       }
 
       nav ul {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background: #0f172a;
         flex-direction: column;
-        width: 100%;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-      }
-
-      nav ul.active {
-        max-height: 300px;
+        gap: 20px;
+        padding-left: 20px;
       }
 
       nav ul li {
-        padding: 15px 20px;
-        text-align: center;
+        padding: 0;
       }
 
+      nav ul li a {
+        font-size: 18px;
+        color: #ffffffb0;
+      }
+
+      nav ul li a.active,
+      nav ul li a:hover {
+        color: #00ffff;
+      }
+
+      /* Adjust hero section to center on mobile */
       .hero {
         flex-direction: column;
         text-align: center;
       }
     }
-    .skills li {
-  padding: 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  background: #334155;
-  color: white;
-}
-
-.skills li i.fab.fa-html5 { color: #e34c26; }
-.skills li i.fab.fa-css3-alt { color: #264de4; }
-.skills li i.fab.fa-js { color: #f0db4f; }
-.skills li i.fab.fa-react { color: #61dbfb; }
-.skills li i.fab.fa-node-js { color: #3c873a; }
-.skills li i.fab.fa-github { color: #ffffff; }
-.skills li i.fas.fa-database { color: #4db33d; }
-.skills li i.fas.fa-server { color: #ff6347; }
-
   </style>
 </head>
 <body>
   <canvas id="galaxy-bg"></canvas>
 
   <header>
-    <div class="logo">Jeevan</div>
-    <i class="fas fa-bars menu-icon" onclick="toggleMenu()" aria-label="Toggle navigation menu"></i>
-    <nav>
-      <ul id="nav-links">
+    <div class="logo">Koneti.Jeevan</div>
+    <nav id="nav-links">
+      <ul>
         <li><a href="#home" class="active">Home</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#education">Education</a></li>
@@ -310,6 +333,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <i class="fas fa-bars menu-icon" onclick="toggleMenu()" aria-label="Toggle navigation menu" role="button" tabindex="0"></i>
   </header>
 
   <section class="hero" id="home">
@@ -356,7 +380,7 @@
     <div class="portfolio-items">
       <div><h3>Green Harvest - E-commerce</h3><p>Organic store w/ cart & animations</p><a href="https://shiva-02-konetijeevanrajus-projects.vercel.app/" target="_blank">Visit Project</a></div>
       <div><h3>Pushpa Movie Fan Site</h3><p>HTML/CSS/JS fan site</p><a href="https://my-website-alpha-smoky-17.vercel.app" target="_blank">Visit Project</a></div>
-    </div>
+            <div><h3>Hotel management System</h3><p>HTML/CSS/JS </p><a href="https://app-2-jkz7.vercel.app/" target="_blank">Visit Project</a></div>
   </section>
 
   <section class="contact" id="contact">
@@ -375,17 +399,26 @@
 
   <script>
     function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("active");
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('active');
     }
 
-    const navLinks = document.querySelectorAll("#nav-links a");
+    // Close nav on clicking any nav link (for mobile)
+    const navLinks = document.querySelectorAll('nav ul li a');
     navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        document.getElementById("nav-links").classList.remove("active");
+      link.addEventListener('click', () => {
+        document.querySelector('nav').classList.remove('active');
       });
     });
 
-    // Galaxy Animation Script
+    // Optional: close nav on ESC key press
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){
+        document.querySelector('nav').classList.remove('active');
+      }
+    });
+
+    // Galaxy Animation Script (same as before)
     const canvas = document.getElementById('galaxy-bg');
     const ctx = canvas.getContext('2d');
     let w, h, stars = [], milky = [], asteroids = [], moon = {x:0, y:0, r:80, angle:0};
